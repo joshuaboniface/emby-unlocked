@@ -53,7 +53,7 @@ self.getRegistrationInfo = function(feature, apiClient) {
 
 This repository also includes a working `debian` folder useful for building custom Debian packages.
 
-To build a package directly
+To build a package directly:
 
 1. Copy the `debian` folder in its entirety to the main `Emby` source directory.
 2. Modify `debian/changelog` to fit the current version (or use tags/3.2.60.12 in the source) and to set your information.
