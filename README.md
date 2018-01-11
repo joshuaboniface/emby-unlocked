@@ -55,12 +55,15 @@ This repository also includes a working `debian` folder useful for building cust
 
 To build a package directly:
 
+0. Install your standard [Debian packaging tools](https://wiki.debian.org/Packaging/Intro) and `quilt`.
 1. Copy the `debian` folder in its entirety to the main `Emby` source directory.
 2. Modify `debian/changelog` to fit the current version (or use tags/3.2.60.12 in the source) and to set your information.
-3. Build the package in the root of the source. The following command will work well on a quad-core processor (adjust the `-j` option to suit your system):
+3. Push on the patches using `quilt push -a` to be sure.
+4. Build the package in the root of the source. The following command will work well on a quad-core processor (adjust the `-j` option to suit your system):
 ```
 dpkg-buildpackage -us -uc -j4
 ```
+Note that we haven't installed any build dependencies yet - this command will fail the first time and show the required packages. Install them then re-run it.
 4. Install the resulting package:
 ```
 cd ..
