@@ -53,14 +53,17 @@ self.getRegistrationInfo = function(feature, apiClient) {
 
 This repository also includes a working `debian` folder useful for building custom Debian packages.
 
+To build a package directly
+
 1. Copy the `debian` folder in its entirety to the main `Emby` source directory.
-2. Modify `debian/changelog` if the version has changed and to set your information.
+2. Modify `debian/changelog` to fit the current version (or use tags/3.2.60.12 in the source) and to set your information.
 3. Build the package in the root of the source. The following command will work well on a quad-core processor (adjust the `-j` option to suit your system):
 ```
 dpkg-buildpackage -us -uc -j4
 ```
 4. Install the resulting package:
 ```
+cd ..
 sudo dpkg -i emby-server_3.2.60.12-ul1_all.deb
 ```
 
@@ -77,3 +80,5 @@ deb-src http://download.opensuse.org/repositories/home:/emby/Debian_9.0/ /
 sudo apt-get update
 sudo apt-get source emby-server
 ```
+4. Copy the `debian` folder from the resulting source directory.
+5. Update the patches to use unified diff format. Note that if the version changes, the original first line of the `connectionmanager.js` patch will likely change and need to be updated. Add them to the `debian/patches` directory along with a `series` file.
