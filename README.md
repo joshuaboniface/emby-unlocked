@@ -64,6 +64,7 @@ To build a package directly:
 dpkg-buildpackage -us -uc -j4
 ```
 Note that we haven't installed any build dependencies yet - this command will fail the first time and show the required packages. Install them then re-run it.
+
 4. Install the resulting package:
 ```
 cd ..
