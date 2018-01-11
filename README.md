@@ -48,3 +48,32 @@ self.getRegistrationInfo = function(feature, apiClient) {
     return Promise.resolve();
 }
 ```
+
+## Debian package
+
+This repository also includes a working `debian` folder useful for building custom Debian packages.
+
+1. Copy the `debian` folder in its entirety to the main `Emby` source directory.
+2. Modify `debian/changelog` if the version has changed and to set your information.
+3. Build the package in the root of the source. The following command will work well on a quad-core processor (adjust the `-j` option to suit your system):
+```
+dpkg-buildpackage -us -uc -j4
+```
+4. Install the resulting package:
+```
+sudo dpkg -i emby-server_3.2.60.12-ul1_all.deb
+```
+
+This `debian/` folder was originally sourced from the 3.2.60.0 source package with the addition of the `emby-unlocked` patches. To reproduce it:
+
+1. Follow the repo instalation directions at the [official build repository](https://software.opensuse.org/download.html?project=home%3Aemby&package=emby-server).
+2. Modify the created list file (assuming Debian Stretch) at `/etc/apt/sources.list.d/emby-server.list` and add a `deb-src` line:
+```
+deb http://download.opensuse.org/repositories/home:/emby/Debian_9.0/ /
+deb-src http://download.opensuse.org/repositories/home:/emby/Debian_9.0/ /
+```
+3. Update your repositories and download the source package:
+```
+sudo apt-get update
+sudo apt-get source emby-server
+```
